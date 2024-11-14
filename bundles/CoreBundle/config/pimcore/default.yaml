@@ -179,6 +179,7 @@ pimcore:
 
     assets:
         metadata:
+#            alt_prefix: 'CarImages'
             class_definitions:
                 data:
                     map:

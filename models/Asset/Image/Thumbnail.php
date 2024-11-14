@@ -321,7 +321,11 @@ final class Thumbnail implements ThumbnailInterface
         }
 
         if (empty($altText) && (!isset($options['disableAutoAlt']) || !$options['disableAutoAlt'])) {
-            if ($image->getMetadata('alt')) {
+
+            $altPrefix = Pimcore\Config::getSystemConfiguration('assets')['metadata']['alt_prefix'];
+            if (!empty($altPrefix) && $image->getMetadata($altPrefix.'.alt')) {
+                $altText = $image->getMetadata($altPrefix.'.alt');
+            } elseif ($image->getMetadata('alt')) {
                 $altText = $image->getMetadata('alt');
             } elseif (isset($options['defaultalt'])) {
                 $altText = $options['defaultalt'];
