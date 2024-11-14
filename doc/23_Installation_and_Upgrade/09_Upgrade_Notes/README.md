@@ -2,6 +2,7 @@
 ## Pimcore 12.0.0
 ### [Documents]
 - Removed deprecated Headless Chrome Processor.
+- Dropped support of `gotenberg/gotenberg-php` `v1.1` in favor of just supporting `v2` which bundles Chromium.
 
 ## Pimcore 11.5.0
 ### [Events]

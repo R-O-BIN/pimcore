@@ -44,10 +44,7 @@ class HtmlToImage
         if (GotenbergHelper::isAvailable()) {
             /** @var GotenbergAPI|object $chrome */
             $chrome = GotenbergAPI::chromium(Config::getSystemConfiguration('gotenberg')['base_url']);
-            if (method_exists($chrome, 'screenshot')) {
-                // only v2 of Gotenberg lib is supported
-                self::$supportedAdapter = 'gotenberg';
-            }
+            self::$supportedAdapter = 'gotenberg';
         }
 
         return self::$supportedAdapter;
