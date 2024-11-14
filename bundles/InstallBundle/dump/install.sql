@@ -513,6 +513,7 @@ CREATE TABLE `users_workspaces_asset` (
   PRIMARY KEY (`cid`, `userId`),
   KEY `userId` (`userId`),
   UNIQUE INDEX `cpath_userId` (`cpath`,`userId`),
+  UNIQUE INDEX `idx_users_workspaces_list_permission` (`userId`, `cpath`, 'list'),
   CONSTRAINT `fk_users_workspaces_asset_assets` FOREIGN KEY (`cid`) REFERENCES `assets` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
   CONSTRAINT `fk_users_workspaces_asset_users` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
 ) DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
@@ -562,6 +563,7 @@ CREATE TABLE `users_workspaces_object` (
   PRIMARY KEY (`cid`, `userId`),
   KEY `userId` (`userId`),
   UNIQUE INDEX `cpath_userId` (`cpath`,`userId`),
+  UNIQUE INDEX `idx_users_workspaces_list_permission` (`userId`, `cpath`, 'list'),
   CONSTRAINT `fk_users_workspaces_object_objects` FOREIGN KEY (`cid`) REFERENCES `objects` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
   CONSTRAINT `fk_users_workspaces_object_users` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
 ) DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
