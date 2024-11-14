@@ -98,9 +98,9 @@ You can configure the generated markup with the following options:
 | `useFrontendPath`              | bool     | Set to `true` to use the full url (including the frontend_prefix).                                                                 |
 
 **Info:** 
-The Auto Alt functionality will try to automatically fallback to any available `alt` value by also checking the metadata entries (with name as `alt`, `defaultalt`). 
+The Auto Alt functionality will try to automatically fall back to any available `alt` value by also checking the metadata entries (with name as `alt`, `defaultalt`). 
 It is also possible to define a prefix for the `alt` metadata (under `pimcore.assets.metadata.alt_prefix` in the configuration) that would have precedence over plain `alt` and be used as fallback when the inline `alt` option are not passed.
-Ultimately would use the image `title` as `alt` value when nothing above is previously found.
+Ultimately, it would use the image `title` as `alt` value when nothing above is previously found.
 
 ```yaml
 

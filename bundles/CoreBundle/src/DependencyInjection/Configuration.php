@@ -651,6 +651,7 @@ final class Configuration implements ConfigurationInterface
                 ->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('alt_prefix')
+                            ->info('Optional prefix for alt metadata to be used in auto alt functionality')
                             ->defaultValue('')
                         ->end()
                         ->arrayNode('predefined')
