@@ -537,6 +537,7 @@ CREATE TABLE `users_workspaces_document` (
   PRIMARY KEY (`cid`, `userId`),
   KEY `userId` (`userId`),
   UNIQUE INDEX `cpath_userId` (`cpath`,`userId`),
+  UNIQUE INDEX `idx_users_workspaces_list_permission` (`userId`, `cpath`, `list`),
   CONSTRAINT `fk_users_workspaces_document_documents` FOREIGN KEY (`cid`) REFERENCES `documents` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
   CONSTRAINT `fk_users_workspaces_document_users` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
 ) DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
