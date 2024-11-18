@@ -4,11 +4,14 @@ declare(strict_types=1);
 /**
  * Pimcore
  *
- * This source file is available under following license:
+ * This source file is available under two different licenses:
+ * - GNU General Public License version 3 (GPLv3)
  * - Pimcore Commercial License (PCL)
+ * Full copyright and license information is available in
+ * LICENSE.md which is distributed with this source code.
  *
  *  @copyright  Copyright (c) Pimcore GmbH (http://www.pimcore.org)
- *  @license    http://www.pimcore.org/license     PCL
+ *  @license    http://www.pimcore.org/license     GPLv3 and PCL
  */
 
 namespace Pimcore\Helper;
@@ -36,7 +39,6 @@ final class WorkspaceConditionHelper
     private const ALLOWED = 'allowed';
 
     private const TABLE_COLUMN = 'CONCAT({prefix}`path`, {prefix}`key`)';
-
 
     /**
      * @throws Exception
@@ -83,8 +85,7 @@ final class WorkspaceConditionHelper
         string $table,
         string $type,
         string $tablePrefix = 'o'
-    ): array
-    {
+    ): array {
         $cacheKey = 'workspace_condition_' . $table . '_' . $user->getId();
         $cache = Cache::load($cacheKey);
 
@@ -109,11 +110,12 @@ final class WorkspaceConditionHelper
         $result = $queryBuilder->executeQuery()->fetchAllAssociative();
         $result = array_column($result, 'id');
 
-        if(empty($result)) {
+        if (empty($result)) {
             // set to -1 since we use it in an in condition
             $result = [-1];
         }
         Cache::save($result, $cacheKey, ['output', 'user-' . $user->getId()]);
+
         return $result;
     }
 
@@ -137,7 +139,7 @@ final class WorkspaceConditionHelper
 
         $paths = $this->mapAllowedPathsWithForbiddenPaths($paths);
         $key = 0;
-        foreach($paths as $allowedPath => $forbiddenPaths) {
+        foreach ($paths as $allowedPath => $forbiddenPaths) {
 
             $paramKey = $this->key($key);
             // prepare sql statement for every single path
@@ -224,13 +226,13 @@ final class WorkspaceConditionHelper
         $paths = [self::ALLOWED => [], self::FORBIDDEN => []];
 
         $result = $this->getUserWorkspaces($type, $user);
-        while($row = $result->fetchAssociative()) {
+        while ($row = $result->fetchAssociative()) {
             $allowed = $row['list'] === 1 ? self::ALLOWED : self::FORBIDDEN;
             $paths[$allowed][] = $row['cpath'];
         }
 
         $result = $this->getRolesWorkspaces($type, $user);
-        while($row = $result->fetchAssociative()) {
+        while ($row = $result->fetchAssociative()) {
             // only insert into forbidden if it is not in already allowed by the user
             if (($row['list'] === 0) && in_array($row['cpath'], $paths[self::ALLOWED], true)) {
                 continue;
@@ -281,7 +283,7 @@ final class WorkspaceConditionHelper
 
     private function getQueryColumn(string $tablePrefix = ''): string
     {
-        if($tablePrefix !== '') {
+        if ($tablePrefix !== '') {
             $tablePrefix.= '.';
         }
 
