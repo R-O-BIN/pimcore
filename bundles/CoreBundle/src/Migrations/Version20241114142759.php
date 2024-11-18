@@ -19,7 +19,6 @@ namespace Pimcore\Bundle\CoreBundle\Migrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\DBAL\Schema\SchemaException;
 use Doctrine\Migrations\AbstractMigration;
-use Exception;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
@@ -52,8 +51,7 @@ final class Version20241114142759 extends AbstractMigration
     {
         if (
             $schema->hasTable($tableName) &&
-            !$schema->getTable($tableName)->hasIndex('idx_users_workspaces_list_permission'))
-        {
+            !$schema->getTable($tableName)->hasIndex('idx_users_workspaces_list_permission')) {
             $schema->getTable($tableName)->addIndex(
                 ['userId', 'cpath', 'list'],
                 'idx_users_workspaces_list_permission'
@@ -68,8 +66,7 @@ final class Version20241114142759 extends AbstractMigration
     {
         if (
             $schema->hasTable($tableName) &&
-            $schema->getTable($tableName)->hasIndex('idx_users_workspaces_list_permission'))
-        {
+            $schema->getTable($tableName)->hasIndex('idx_users_workspaces_list_permission')) {
             $schema->getTable($tableName)->dropIndex('idx_users_workspaces_list_permission');
         }
     }
