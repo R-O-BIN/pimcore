@@ -17,6 +17,7 @@ namespace Pimcore\Model\User\AbstractUser;
 
 use DateTime;
 use Exception;
+use Pimcore\Cache;
 use Pimcore\Logger;
 use Pimcore\Model;
 
@@ -142,7 +143,7 @@ class Dao extends Model\Dao\AbstractDao
                 $data[$key] = $value;
             }
         }
-
+        Cache::clearTag('user-' .  $this->model->getId());
         $this->db->update('users', $data, ['id' => $this->model->getId()]);
     }
 

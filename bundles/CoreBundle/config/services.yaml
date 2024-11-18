@@ -186,3 +186,10 @@ services:
         public: true
 
     Pimcore\Model\Notification\Service\UserService: ~
+
+
+    #
+    # WORKSPACE
+    #
+
+    Pimcore\Helper\WorkspaceConditionHelper: ~
