@@ -1690,7 +1690,7 @@ class Asset extends Element\AbstractElement
             $storage->deleteDirectory($oldPath);
         } catch (UnableToMoveFile $e) {
             // rollback moved files
-            foreach($movedFiles as $src => $dest) {
+            foreach ($movedFiles as $src => $dest) {
                 $storage->move($src, $dest);
             }
 
