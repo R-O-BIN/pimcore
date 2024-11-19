@@ -60,21 +60,48 @@ framework:
     html_sanitizer:
         sanitizers:
             pimcore.wysiwyg_sanitizer:
+                max_input_length: -1
+                allow_attributes:
+                    pimcore_type: '*'
+                    pimcore_id: '*'
+                allow_relative_links: true
+                allow_relative_medias: true
                 allow_elements:
-                    p: ['class', 'style']
+                    span: [ 'class', 'style', 'id' ]
+                    div: [ 'class', 'style', 'id' ]
+                    p: [ 'class', 'style', 'id', 'dir', 'data-cell' ]
                     strong: 'class'
                     em: 'class'
-                    h1: 'class'
-                    a: ['class', 'href', 'target', 'title', 'rel']
-                    table: ['class', 'style', 'cellspacing', 'cellpadding', 'border', 'width', 'height']
+                    h1: [ 'class', 'id' ]
+                    h2: [ 'class', 'id' ]
+                    h3: [ 'class', 'id' ]
+                    h4: [ 'class', 'id' ]
+                    h5: [ 'class', 'id' ]
+                    h6: [ 'class', 'id' ]
+                    a: [ 'class', 'id', 'href', 'target', 'title', 'rel', 'style' ]
+                    table: [ 'class', 'style', 'cellspacing', 'cellpadding', 'border', 'width', 'height', 'id' ]
                     colgroup: 'class'
-                    col: ['class', 'style']
-                    tbody: 'class'
-                    tr: 'class'
-                    td: 'class'
-                    ul: ['class', 'style']
-                    li: ['class', 'style']
-                    ol: ['class', 'style']
+                    col: [ 'class', 'style', 'id' ]
+                    thead: [ 'class', 'id', 'style' ]
+                    tbody: [ 'class', 'id', 'style' ]
+                    tr: [ 'class', 'id', 'style', 'colspan', 'rowspan' ]
+                    td: [ 'class', 'id', 'style', 'colspan', 'rowspan', 'data-row', 'width', 'height' ]
+                    th: [ 'class', 'id', 'scope', 'style', 'colspan', 'rowspan', 'width', 'height' ]
+                    ul: [ 'class', 'style', 'id' ]
+                    li: [ 'class', 'style', 'id' ]
+                    ol: [ 'class', 'style', 'id' ]
+                    u: [ 'class', 'id' ]
+                    i: [ 'class', 'id' ]
+                    b: [ 'class', 'id' ]
+                    caption: [ 'class', 'id' ]
+                    sub: [ 'class', 'id' ]
+                    sup: [ 'class', 'id' ]
+                    blockquote: [ 'class', 'id' ]
+                    s: [ 'class', 'id' ]
+                    iframe: [ 'frameborder', 'height', 'longdesc', 'name', 'sandbox', 'scrolling', 'src', 'title', 'width' ]
+                    br: ''
+                    img: [ 'class', 'alt', 'style', 'src' ]
+                    hr: ''
 ```
 If you want to adapt this configuration please have a look at the [symfony documentation](https://symfony.com/doc/current/html_sanitizer.html). Add your custom configuration to you project, e.g. to `config/packages/html_sanitizer.yaml`
 
