@@ -1676,18 +1676,26 @@ class Asset extends Element\AbstractElement
         }
 
         try {
+            $movedFiles = [];
             $children = $storage->listContents($oldPath, true);
             foreach ($children as $child) {
                 if ($child['type'] === 'file') {
                     $src  = $child['path'];
                     $dest = str_replace($oldPath, $newPath, '/' . $src);
                     $storage->move($src, $dest);
+                    $movedFiles[$dest] = $src;
                 }
             }
 
             $storage->deleteDirectory($oldPath);
         } catch (UnableToMoveFile $e) {
-            // noting to do
+            // rollback moved files
+            foreach($movedFiles as $src => $dest) {
+                $storage->move($src, $dest);
+            }
+
+            // trigger database rollback
+            throw $e;
         }
     }
 
