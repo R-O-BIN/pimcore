@@ -1,5 +1,10 @@
 # Upgrade Notes
 
+## Pimcore 11.5.0
+### General
+#### [Database]
+- Adding index to `users_workspaces_asset`, `users_workspaces_document` and `users_workspaces_object` tables on `userId`, `cpath` and `list` to improve permission checks.  
+  Make sure to run the migration `bin/console doctrine:migrations:execute Pimcore\\Bundle\\CoreBundle\\Migrations\\Version20241114142759`.
 ## Pimcore 11.4.0
 ### General
 #### [Logging]
